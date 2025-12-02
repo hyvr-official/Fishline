@@ -106,7 +106,7 @@ We will be using NSSM to install and manage the service for Fishline.
 ### :rocket: Using in Gitlab and Github
 Use the URL `http://[server pulic ip]:[port fishline is running]/[project name]` (eg. http://9.9.9.9:3000/project-name). You can give this URL as the webhook URL in Github and Gitlab. `[project name]` is given in the `config.json` commands array.
 
-### :gear: Configuring Athena
+### :gear: Configuring Fishline
 Fishline can be configured using the `config.json` file created on the root the Fishline binary. Here are the details of the configuration keys and what they do in table format.
 
 | Option | Description | Example |
