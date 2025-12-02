@@ -6,13 +6,15 @@ You can download the pre-compiled binaries from the Github [releases](https://gi
 
 <details>
 <summary>Install on Docker container</summary>
+<br>
 
 
 </details>
 
 <details>
 <summary>Install on Linux distro</summary>
-
+<br>
+    
 You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. After that you can follow the below steps in order.
 
 #### 1. Create a `config.json` file in the root folder where you but the Fishline binary. Here is the format of the JSON file. Fill all the commands and other properties as needed also.
@@ -67,7 +69,7 @@ systemctl status fishline.service
 
 <details>
 <summary>Install on Windows machine</summary>
-
+<br>
 
 You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. After that you can follow the below steps in order.
 
@@ -81,7 +83,7 @@ You can find more details about the paramters in config file in below sections.
     "commands": {
         "project-name": {
             "main": [
-                "cd C:\Projects"
+                "cd C:\\Projects"
                 "git pull"
             ]
         }
@@ -89,8 +91,17 @@ You can find more details about the paramters in config file in below sections.
 }
 `````
 
-#### 2. Create a service file called `fishline_kafka.service` in the directory `/etc/systemd/system` using the following commands.
-</details>
+#### 2. Download and install [NSSM](https://nssm.cc/download)
+We will be using NSSM to install and manage the service for Fishline.
+
+#### 3. Create a service for Fishline using NSSM
+* After installing [NSSM](https://nssm.cc/download)
+* Run `nssm install fishline` to start the service building process.
+* In the GUI add the details give below.
+* `Application path` will the folder where you keep the downloaded `fishline.exe` binary
+* `Aruguments` will be the `--config=[path to the config.json file]` eg: `--config=C:\Fishline\config.json`
+* Then install and start the service
+</details> 
 
 ## :hammer_and_wrench: How to build
 You can build the binaries or do development of Fishline by following the below steps. Fishline is build fully on Golang. So you should install latest version of Go from [here](https://go.dev/doc/install).
