@@ -1,4 +1,4 @@
-![Fishline logo](https://i.imgur.com/51D1iLH.png)
+![Fishline logo](https://github.com/hyvr-official/Fishline/blob/main/art/readme-header.png?raw=true)
 Fishline is a GitHub/GitLab webhook receiver that executes commands based on incoming webhook payloads. It lets you run server-side commands, such as `git pull` in response to events from GitHub or GitLab. Fishline starts a server on a specified port that listens for these webhook requests, and you can configure different command sets for different projects and branches.
 
 ### :zap: Get started
