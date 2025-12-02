@@ -106,7 +106,7 @@ We will be using NSSM to install and manage the service for Fishline.
 ### :rocket: Using in Gitlab and Github
 Use the URL `http://[server pulic ip]:[port fishline is running]/[project name]` (eg. http://9.9.9.9:3000/project-name). You can give this URL as the webhook URL in Github and Gitlab. `[project name]` is given in the `config.json` commands array.
 
-## :gear: Configuring Athena
+### :gear: Configuring Athena
 Fishline can be configured using the `config.json` file created on the root the Fishline binary. Here are the details of the configuration keys and what they do in table format.
 
 | Option | Description | Example |
@@ -116,7 +116,7 @@ Fishline can be configured using the `config.json` file created on the root the 
 | `debug` | This option defines wheather debug mode is enabled or not. Debug will print the logs in terminal | `true` or `false` |
 | `commands` | This will be object where we save the project names, branches and commands that should be run | Examples are give below |
 
-### Examples of how to configure `commands` option in `config.json` 
+#### Examples of how to configure `commands` option in `config.json` 
 Here shows an example project called `chat-app` and shows the commands to run when webhook is called with `main` and `development` branch.
 `````json
 {
@@ -181,7 +181,7 @@ Here shows an example with two projects called `chat-app` and `blog-app`.
 > * `http://[pulic ip]:[port]/chat-app` (eg. http://9.9.9.9:3000/chat-app).
 > * `http://[pulic ip]:[port]/blog-app` (eg. http://9.9.9.9:3000/blog-app).
 
-## :hammer_and_wrench: How to build
+### :hammer_and_wrench: How to build
 You can build the binaries or do development of Fishline by following the below steps. Fishline is build fully on Golang. So you should install latest version of Go from [here](https://go.dev/doc/install).
 
 * Clone that project from Github.
