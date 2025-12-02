@@ -4,7 +4,18 @@ Fishline is a GitHub/GitLab webhook receiver that executes commands based on inc
 ### :zap: Get started
 You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. After that you can follow the below steps in order.
 
-#### Create a `config.json` file in the root folder where you but the Fishline binary. Here is the format of the JSON file. Fill all the commands and other properties as needed also.
+<details>
+<summary>Install on Docker container</summary>
+
+
+</details>
+
+<details>
+<summary>Install on Linux distro</summary>
+
+You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. After that you can follow the below steps in order.
+
+#### 1. Create a `config.json` file in the root folder where you but the Fishline binary. Here is the format of the JSON file. Fill all the commands and other properties as needed also.
 You can find more details about the paramters in config file in below sections.
 `````json
 {
@@ -22,16 +33,14 @@ You can find more details about the paramters in config file in below sections.
 }
 `````
 
-#### Setup a service for running Fishline in the background. Below given are the steps to create them on a Linux distro.
-
-#### Create a service file called `fishline_kafka.service` in the directory `/etc/systemd/system` using the following commands.
+#### 2. Create a service file called `fishline_kafka.service` in the directory `/etc/systemd/system` using the following commands.
 
 `````bash
 cd /etc/systemd/system
 nano fishline.service
 `````
 
-#### Copy and paste the below contents to the above created service file `fishline.service`.
+#### 3. Copy and paste the below contents to the above created service file `fishline.service`.
 
 `````s
 [Unit]
@@ -40,17 +49,57 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=fishline
+ExecStart=fishline --config=/var/www/fishline/config.json
 
 [Install]
 WantedBy=multi-user.target
 `````
 
-> Please note that path in `ExecStart` needs to change while creating the service file.
+> Please note that path in `ExecStart` needs to change while creating the service file. Also change the path for the file in `--config` to the `config.json` file that you created in the above step.
 
-#### Now you can start the service and also check the status of the service.
+#### 4. Now you can start the service and also check the status of the service.
 
 `````bash
 systemctl start fishline.service
 systemctl status fishline.service
 `````
+</details>
+
+<details>
+<summary>Install on Windows machine</summary>
+
+
+You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. After that you can follow the below steps in order.
+
+#### 1. Create a `config.json` file in the root folder where you but the Fishline binary. Here is the format of the JSON file. Fill all the commands and other properties as needed also.
+You can find more details about the paramters in config file in below sections.
+`````json
+{
+    "port": "3000",
+    "logPath": "./",
+    "debug": false,
+    "commands": {
+        "project-name": {
+            "main": [
+                "cd C:\Projects"
+                "git pull"
+            ]
+        }
+    }
+}
+`````
+
+#### 2. Create a service file called `fishline_kafka.service` in the directory `/etc/systemd/system` using the following commands.
+</details>
+
+## :hammer_and_wrench: How to build
+You can build the binaries or do development of Fishline by following the below steps. Fishline is build fully on Golang. So you should install latest version of Go from [here](https://go.dev/doc/install).
+
+* Clone that project from Github.
+* Run `go mod download` command to install all mods.
+* Run `build.bash` if you are building from Linux.
+* Run `build.bat` if you are building from Windows.
+* Build will be generated in the `./build` folder
+
+### :page_with_curl: License
+Fishline is licensed under the [MIT License](https://github.com/hyvr-official/Fishline/blob/master/LICENSE).
