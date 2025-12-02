@@ -106,6 +106,8 @@ func PipelineHandler(w http.ResponseWriter, r *http.Request) {
 	WriteLog("Starting pipeline commands execution")
 
 	for _, command := range ConfigValue.Commands[project][branch] {
+		WriteLog(fmt.Sprintf("Running the command %s", command))
+
 		RunCommand(command)
 	}
 
