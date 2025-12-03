@@ -8,8 +8,29 @@ You can download the pre-compiled binaries from the Github [releases](https://gi
 <summary>Install on Docker container</summary>
 <br>
 
-> To be added later
+Below example `Dockerfile` file shows how to use Fishline in the docker container.
+`````dockerfile
+FROM ubuntu:22.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y openssh-server curl
+
+WORKDIR /var/www/fishline
+
+COPY config.json /var/www/fishline/config.json
+
+RUN curl -L -o fishline.tar.gz https://github.com/hyvr-official/Fishline/releases/download/v1.01/fishline_linux_x86_64.tar.gz && \
+    tar -xzf fishline.tar.gz && \
+    rm fishline.tar.gz && \
+    chmod +x fishline
+
+EXPOSE 3000
+
+CMD sh -c "/var/www/fishline/fishline --config=/var/www/fishline/config.json"
+`````
+ 
 </details>
 
 <details name="install">
