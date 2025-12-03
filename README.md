@@ -1,4 +1,4 @@
-![Fishline logo](https://i.imgur.com/51D1iLH.png)
+![Fishline logo](https://github.com/hyvr-official/Fishline/blob/main/art/readme-header.png?raw=true)
 Fishline is a GitHub/GitLab webhook receiver that executes commands based on incoming webhook payloads. It lets you run server-side commands, such as `git pull` in response to events from GitHub or GitLab. Fishline starts a server on a specified port that listens for these webhook requests, and you can configure different command sets for different projects and branches.
 
 ### :zap: Get started
@@ -106,7 +106,7 @@ We will be using NSSM to install and manage the service for Fishline.
 ### :rocket: Using in Gitlab and Github
 Use the URL `http://[server pulic ip]:[port fishline is running]/[project name]` (eg. http://9.9.9.9:3000/project-name). You can give this URL as the webhook URL in Github and Gitlab. `[project name]` is given in the `config.json` commands array.
 
-### :gear: Configuring Athena
+### :gear: Configuring Fishline
 Fishline can be configured using the `config.json` file created on the root the Fishline binary. Here are the details of the configuration keys and what they do in table format.
 
 | Option | Description | Example |
