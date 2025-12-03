@@ -37,7 +37,7 @@ CMD sh -c "/var/www/fishline/fishline --config=/var/www/fishline/config.json"
 <summary>Install on Linux distro</summary>
 <br>
     
-You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. After that you can follow the below steps in order.
+You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. Then run `chmod +x fishline` to make it executable. After that you can follow the below steps in order.
 
 #### 1. Create a `config.json` file in the root folder where you but the Fishline binary. Here is the format of the JSON file. Fill all the commands and other properties as needed also.
 You can find more details about the paramters in config file in below sections.
