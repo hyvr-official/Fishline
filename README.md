@@ -7,6 +7,7 @@ You can download the pre-compiled binaries from the Github [releases](https://gi
 <details name="install">
 <summary>Install on Docker container</summary>
 <br>
+
 > To be added later
 
 </details>
