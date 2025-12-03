@@ -1,15 +1,16 @@
 @echo off
 echo Building Go binaries
 
-if not exist build mkdir build
+IF EXIST build (
+    RMDIR /S /Q build
+)
 
-set GOOS=windows
-set GOARCH=amd64
-go build -o build\fishline.exe
+SET GORUN=true
+goreleaser release --snapshot --clean
 
-set GOOS=linux
-set GOARCH=amd64
-go build -o build\fishline
+for /F "delims=" %%a in ('echo prompt $E^| cmd') do set "ESC=%%a"
 
-echo Build complete! Files are in the /build folder
+echo.
+echo %ESC%[32mBuild complete! Files are in the /build folder%ESC%[0m
+
 pause

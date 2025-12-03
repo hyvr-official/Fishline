@@ -182,10 +182,11 @@ Here shows an example with two projects called `chat-app` and `blog-app`.
 > * `http://[pulic ip]:[port]/blog-app` (eg. http://9.9.9.9:3000/blog-app).
 
 ### :hammer_and_wrench: How to build
-You can build the binaries or do development of Fishline by following the below steps. Fishline is build fully on Golang. So you should install latest version of Go from [here](https://go.dev/doc/install).
+You can build the binaries or do development of Fishline by following the below steps. Fishline is build fully on Golang and Goreleaser is used for building releases. So you should install latest version of Go from [here](https://go.dev/doc/install).
 
 * Clone that project from Github.
 * Run `go mod download` command to install all mods.
+* Install Goreleaser by running `go install github.com/goreleaser/goreleaser/v2@latest`
 * Run `build.bash` if you are building from Linux.
 * Run `build.bat` if you are building from Windows.
 * Build will be generated in the `./build` folder

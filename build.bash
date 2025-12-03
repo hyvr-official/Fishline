@@ -1,13 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "Building Go binaries"
 
-mkdir -p build
+if [ -d "build" ]; then
+    rm -rf build
+fi
 
-echo "Building for Windows..."
-GOOS=windows GOARCH=amd64 go build -o build/fishline.exe
+export GORUN=true
 
-echo "Building for Linux..."
-GOOS=linux GOARCH=amd64 go build -o build/fishline
+goreleaser release --snapshot --clean
 
-echo "Build complete! Files are in the ./build folder"
+ESC="\033"
+
+echo
+echo -e "${ESC}[32mBuild complete! Files are in the /build folder${ESC}[0m"
+
+read -p "Press Enter to continue..."
