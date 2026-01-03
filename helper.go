@@ -10,6 +10,7 @@ import (
 	"os/exec"
 	"encoding/json"
 	"strings"
+	"runtime"
 )
 
 func GetPublicIP() string {
@@ -34,13 +35,8 @@ func WriteLog(line string) {
 	}
 	defer f.Close()
 
-	ist, err := time.LoadLocation("Asia/Kolkata")
-	if err != nil {
-		log.Fatalf("%v", err)
-	}
-
-	timestamp := time.Now().In(ist).Format("2006-01-02 15:04:05")
-	logLine := fmt.Sprintf("[%s IST] %s\n", timestamp, line)
+	timestamp := time.Now().Local().Format("2006-01-02 15:04:05")
+	logLine := fmt.Sprintf("[%s] %s\n", timestamp, line)
 
 	if ConfigValue.Debug {
 		fmt.Print(logLine)
@@ -51,9 +47,19 @@ func WriteLog(line string) {
 	}
 }
 
-func RunCommand(command string) {
-	parts := strings.Fields(command)
-	cmd := exec.Command(parts[0], parts[1:]...)
+func RunCommands(commands []string) {
+	var shell, flag string
+
+	if runtime.GOOS == "windows" {
+		shell = "powershell"
+		flag = "-Command"
+	} else {
+		shell = "/bin/sh"
+		flag = "-c"
+	}
+
+	command := strings.Join(commands, " && ")
+	cmd := exec.Command(shell, flag, command)
 	output, err := cmd.CombinedOutput()
 
 	WriteLog(string(output))

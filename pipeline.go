@@ -105,11 +105,7 @@ func PipelineHandler(w http.ResponseWriter, r *http.Request) {
 
 	WriteLog("Starting pipeline commands execution")
 
-	for _, command := range ConfigValue.Commands[project][branch] {
-		WriteLog(fmt.Sprintf("Running the command %s", command))
-
-		RunCommand(command)
-	}
+	RunCommands(ConfigValue.Commands[project][branch])
 
 	json.NewEncoder(w).Encode(map[string]string{
 		"status": "200",

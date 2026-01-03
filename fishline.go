@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	version := "v1.01"
+	version := "v1.02"
 	publicIP := GetPublicIP()
 	port := ConfigValue.Port
 
