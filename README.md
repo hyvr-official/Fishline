@@ -8,15 +8,36 @@ You can download the pre-compiled binaries from the Github [releases](https://gi
 <summary>Install on Docker container</summary>
 <br>
 
-> To be added later
+Below example `Dockerfile` file shows how to use Fishline in the docker container.
+`````dockerfile
+FROM ubuntu:22.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y openssh-server curl
+
+WORKDIR /var/www/fishline
+
+COPY config.json /var/www/fishline/config.json
+
+RUN curl -L -o fishline.tar.gz https://github.com/hyvr-official/Fishline/releases/download/v1.01/fishline_linux_x86_64.tar.gz && \
+    tar -xzf fishline.tar.gz && \
+    rm fishline.tar.gz && \
+    chmod +x fishline
+
+EXPOSE 3000
+
+CMD sh -c "/var/www/fishline/fishline --config=/var/www/fishline/config.json"
+`````
+ 
 </details>
 
 <details name="install">
 <summary>Install on Linux distro</summary>
 <br>
     
-You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. After that you can follow the below steps in order.
+You can download the pre-compiled binaries from the Github [releases](https://github.com/hyvr-official/Fishline/releases) page and copy them to the desired location. Then run `chmod +x fishline` to make it executable. After that you can follow the below steps in order.
 
 #### 1. Create a `config.json` file in the root folder where you but the Fishline binary. Here is the format of the JSON file. Fill all the commands and other properties as needed also.
 You can find more details about the paramters in config file in below sections.
