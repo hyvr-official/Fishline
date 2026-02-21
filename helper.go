@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"io"
 	"time"
 	"log"
@@ -11,7 +10,16 @@ import (
 	"encoding/json"
 	"strings"
 	"runtime"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
+
+var Logger = &lumberjack.Logger{
+    Filename:   ConfigValue.LogPath + "/log",
+    MaxSize:    1,
+    MaxBackups: 3,
+    MaxAge:     28,
+    Compress:   true, 
+}
 
 func GetPublicIP() string {
 	resp, err := http.Get("https://api.ipify.org?format=text")
@@ -29,22 +37,16 @@ func GetPublicIP() string {
 }
 
 func WriteLog(line string) {
-	f, err := os.OpenFile(ConfigValue.LogPath+string(os.PathSeparator)+"log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Fatalf("%v", err)
-	}
-	defer f.Close()
-
 	timestamp := time.Now().Local().Format("2006-01-02 15:04:05")
-	logLine := fmt.Sprintf("[%s] %s\n", timestamp, line)
+    logLine := fmt.Sprintf("[%s] %s\n", timestamp, line)
 
-	if ConfigValue.Debug {
-		fmt.Print(logLine)
-	}
+    if ConfigValue.Debug {
+        fmt.Print(logLine)
+    }
 
-	if _, err := f.WriteString(logLine); err != nil {
-		log.Fatalf("%v", err)
-	}
+    if _, err := Logger.Write([]byte(logLine)); err != nil {
+        log.Printf("Failed to write to log: %v", err)
+    }
 }
 
 func RunCommands(commands []string) {

@@ -1,10 +1,13 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
+
+	"github.com/golang-queue/queue"
 )
 
 type repository struct {
@@ -17,7 +20,7 @@ type payload struct {
 	repository `json:"repository"`
 }
 
-func PipelineHandler(w http.ResponseWriter, r *http.Request) {
+func PipelineHandler(w http.ResponseWriter, r *http.Request, pipelineQueue *queue.Queue) {
 	w.Header().Set("Content-Type", "application/json")
 
 	if r.Method != http.MethodPost {
@@ -103,9 +106,28 @@ func PipelineHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	WriteLog("Starting pipeline commands execution")
+	if (pipelineQueue.SubmittedTasks()-pipelineQueue.CompletedTasks()) > 10 {
+		WriteLog("Queue is full and pipeline call is ignored")
 
-	RunCommands(ConfigValue.Commands[project][branch])
+		w.WriteHeader(http.StatusMethodNotAllowed)
+
+		json.NewEncoder(w).Encode(map[string]string{
+			"error":  "Queue is full",
+			"status": "405",
+		})
+
+		return
+	}
+
+	WriteLog("Adding call to the pipeline queue")
+
+	pipelineQueue.QueueTask(func(ctx context.Context) error {
+		WriteLog("Starting pipeline commands execution")
+		
+		RunCommands(ConfigValue.Commands[project][branch])
+
+		return nil
+	})
 
 	json.NewEncoder(w).Encode(map[string]string{
 		"status": "200",

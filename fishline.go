@@ -7,6 +7,7 @@ import (
 
 	"github.com/Delta456/box-cli-maker/v2"
 	"github.com/common-nighthawk/go-figure"
+	"github.com/golang-queue/queue"
 )
 
 func main() {
@@ -14,7 +15,13 @@ func main() {
 	publicIP := GetPublicIP()
 	port := ConfigValue.Port
 
-	http.HandleFunc("/", PipelineHandler)
+	pipelineQueue := queue.NewPool(1)
+
+	defer pipelineQueue.Release()
+
+	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+		PipelineHandler(writer, request, pipelineQueue)
+	})
 
 	title := figure.NewFigure("Fishline", "smslant", true)
 	title.Print()
