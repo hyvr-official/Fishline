@@ -21,7 +21,7 @@ WORKDIR /var/www/fishline
 
 COPY config.json /var/www/fishline/config.json
 
-RUN curl -L -o fishline.tar.gz https://github.com/hyvr-official/Fishline/releases/download/v1.01/fishline_linux_x86_64.tar.gz && \
+RUN curl -L -o fishline.tar.gz https://github.com/hyvr-official/Fishline/releases/download/v1.03/fishline_linux_x86_64.tar.gz && \
     tar -xzf fishline.tar.gz && \
     rm fishline.tar.gz && \
     chmod +x fishline
