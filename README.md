@@ -203,6 +203,12 @@ Here shows an example with two projects called `chat-app` and `blog-app`.
 > * `http://[pulic ip]:[port]/chat-app` (eg. http://9.9.9.9:3000/chat-app).
 > * `http://[pulic ip]:[port]/blog-app` (eg. http://9.9.9.9:3000/blog-app).
 
+### :pizza: Running integration tests
+Run the following command to run all the integration tests.
+`````bash
+go test -v ./test
+`````
+
 ### :hammer_and_wrench: How to build
 You can build the binaries or do development of Fishline by following the below steps. Fishline is build fully on Golang and Goreleaser is used for building releases. So you should install latest version of Go from [here](https://go.dev/doc/install).
 
