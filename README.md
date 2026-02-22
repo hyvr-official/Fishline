@@ -57,7 +57,7 @@ You can find more details about the paramters in config file in below sections.
 }
 `````
 
-#### 2. Create a service file called `fishline_kafka.service` in the directory `/etc/systemd/system` using the following commands.
+#### 2. Create a service file called `fishline.service` in the directory `/etc/systemd/system` using the following commands.
 
 `````bash
 cd /etc/systemd/system
